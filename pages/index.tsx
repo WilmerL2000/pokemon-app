@@ -6,14 +6,14 @@ import PokemonCard from '../components/pokemon/PokemonCard';
 import { PokemonListResponse, SmallPokemon } from '../interfaces';
 
 interface Props {
-  pokemons: SmallPokemon;
+  pokemons: SmallPokemon[];
 }
 
 const Home: NextPage<Props> = ({ pokemons }) => {
   return (
     <Layout title="Listado de Pokemons">
       <Grid.Container gap={2} justify="flex-start">
-        {pokemons.map((pokemon) => (
+        {pokemons?.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
       </Grid.Container>
