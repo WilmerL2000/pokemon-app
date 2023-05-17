@@ -121,15 +121,31 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: pokemons.map((id) => ({
       params: { id },
     })),
-    fallback: false,
+    fallback: 'blocking',
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params as { id: string };
+  const pokemon = await getPokemonInfo(id);
+
+  /* This code block is checking if the `pokemon` object is falsy (i.e., `null`, `undefined`, `false`,
+`0`, `NaN`, or an empty string). If it is falsy, it means that the requested Pokemon does not exist,
+so the function returns a redirect object that redirects the user to the homepage (`'/'`) with a
+`permanent` property set to `false`, which means that the redirect is temporary and search engines
+should not update their links. */
+  if (!pokemon) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
 
   return {
-    props: { pokemon: await getPokemonInfo(id) },
+    props: { pokemon },
+    revalidate: 40000,
   };
 };
 
