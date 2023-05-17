@@ -24,22 +24,18 @@ const Navbar = () => {
         height={80}
       />
 
-      <NextLink href="/" passHref>
-        <Link>
-          <Text color="white" h2>
-            P
-          </Text>
-          <Text color="white" h3>
-            okémon
-          </Text>
-        </Link>
-      </NextLink>
+      <Link href="/">
+        <Text color="white" h2>
+          P
+        </Text>
+        <Text color="white" h3>
+          okémon
+        </Text>
+      </Link>
       <Spacer css={{ flex: 1 }} />
-      <NextLink href="/favorites" passHref>
-        <Link css={{ marginRight: '10px' }}>
-          <Text color="white">Favoritos</Text>
-        </Link>
-      </NextLink>
+      <Link href="/favorites" css={{ marginRight: '10px' }}>
+        <Text color="white">Favoritos</Text>
+      </Link>
     </div>
   );
 };
